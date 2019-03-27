@@ -1,20 +1,165 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<section>
+  <div class="container">
+    <div class="row">
+      <form (ngSubmit)="onAdd($event)" [formGroup]="userForm" #f="ngForm">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="emp_id">Employee ID:</label>
+            <input type="text" class="form-control" id="emp_id" formControlName="emp_id" autocomplete="off">
+          </div>
+          <div *ngIf="emp_id.invalid && (emp_id.dirty || emp_id.touched)" class=" error_show">
+            <div *ngIf="emp_id.errors.required">
+              Employee ID is required!!
+            </div>
+            <div *ngIf="emp_id.errors.pattern">
+              Invalid Number!!
+            </div>
+          </div>
+        </div>
 
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" class="form-control" id="first_name" formControlName="emp_fname" autocomplete="off"
+              [pattern]="textPattern">
+          </div>
+          <div *ngIf="emp_fname.invalid && (emp_fname.dirty || emp_fname.touched)" class="error_show">
+            <div *ngIf="emp_fname.errors.required">
+              First Name is required!!
+            </div>
+            <div *ngIf="emp_fname.errors.pattern">
+             Only Alphabet Characters are Allowed!!
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" class="form-control" id="last_name" formControlName="emp_lname" autocomplete="off"
+              required>
+          </div>
+          <div *ngIf="emp_lname.invalid && (emp_lname.dirty || emp_lname.touched)" class="error_show">
+            <div *ngIf="emp_lname.errors.required">
+              Last Name is required!!
+            </div>
+            <div *ngIf="emp_lname.errors.pattern">
+              Only Apphabet Characters are Allowed!!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="email_id">Email:</label>
+            <input type="email" class="form-control" id="email_id" formControlName="emp_mail" autocomplete="off">
+          </div>
+          <div *ngIf="emp_mail.invalid && (emp_mail.dirty || emp_mail.touched)" class="error_show">
+            <div *ngIf="emp_mail.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="emp_mail.errors.pattern">
+              Email Patern mismatch!!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" class="form-control" id="phone" formControlName="emp_phone" autocomplete="off">
+          </div>
+
+          <div *ngIf="emp_phone.invalid && (emp_phone.dirty || emp_phone.touched)" class="error_show">
+            <div *ngIf="emp_phone.errors.required">
+              Mobile Number is required!!
+            </div>
+            <div *ngIf="emp_phone.errors.pattern">
+              Invalid Number!!
+            </div>
+
+            <div *ngIf="emp_phone.errors.maxlength">
+              Maxmimum length is 10!!
+            </div>
+
+            <div *ngIf="emp_phone.errors.minlength">
+              Minimum length is 10!!
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <input type="text" class="form-control" id="department" formControlName="emp_depart" autocomplete="off">
+          </div>
+          <div *ngIf="emp_depart.invalid && (emp_depart.dirty || emp_depart.touched)" class="error_show">
+            <div *ngIf="emp_depart.errors.required">
+              Department Name is required!!
+            </div>
+            <div *ngIf="emp_depart.errors.pattern">
+              Only Apphabet Characters are Allowed!!
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid || editMode">ADD</button>
+        <button class="btn btn-primary" [disabled]="!editMode"  (click)="onUpdate()">UPDATE</button>
+
+      </form>
+    </div>
+
+    <div *ngIf="userDetails && userDetails.length; else noRecord">
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>SI.No</th>
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Department</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let user of userDetails; let i= index">
+            <td>{{ i + 1 }}</td>
+            <td>{{user.emp_id}}</td>
+            <td>{{user.emp_fname  | uppercase }}</td>
+            <td>{{user.emp_lname | uppercase}}</td>
+            <td>{{user.emp_mail}}</td>
+            <td>{{user.emp_phone}}</td>
+            <td>{{user.emp_depart}}</td>
+            <td><button class="btn btn-danger edit_btn" (click)=" onDelete(i)"><span class="glyphicon glyphicon-trash"></span></button></td>
+            <td><button class="btn btn-info edit_btn" (click)="onEditMode(user, i)">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+
+    <ng-template #noRecord>
+     <div class="text-center"> 
+       <h2>No record found</h2>
+     </div>
+    </ng-template>
+   
+
+    Valid: {{userForm.valid}}
+    <pre>
+      {{ userForm.value | json }}
+   </pre>
+  </div>
+</section>
