@@ -54,3 +54,19 @@ input.ng-valid {
   display:block;
   margin:auto;
 }
+.delete_skill{
+  position: absolute;
+  right: 0px;
+  top: 15px
+}
+
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

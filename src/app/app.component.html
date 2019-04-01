@@ -1,7 +1,10 @@
-<section>
+<!-- <section>
   <div class="container">
     <div class="row">
-      <form (ngSubmit)="onAdd($event)" [formGroup]="userForm" #f="ngForm">
+        
+
+     <form (ngSubmit)="onAdd($event)" [formGroup]="userForm" #f="ngForm">
+
         <div class="col-sm-2">
           <div class="form-group">
             <label for="emp_id">Employee ID:</label>
@@ -28,7 +31,7 @@
               First Name is required!!
             </div>
             <div *ngIf="emp_fname.errors.pattern">
-             Only Alphabet Characters are Allowed!!
+              Only Alphabet Characters are Allowed!!
             </div>
 
           </div>
@@ -106,13 +109,107 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid || editMode">ADD</button>
-        <button class="btn btn-primary" [disabled]="!editMode"  (click)="onUpdate()">UPDATE</button>
 
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid || editMode">ADD</button>
+        <button class="btn btn-primary" [disabled]="!editMode" (click)="onUpdate()">UPDATE</button>
+      </form> 
+
+      <form action="" [formGroup]="employeeform">
+        <div class="col-sm-12">
+          <div class="form-group" [ngClass]="{'has-error': formErrors.fullname}">
+            <label for="full_name">Full Name:</label>
+            <input (blur)="loginValidationError()" type="text" class="form-control" id="full_name"
+              formControlName="fullname" autocomplete="off">
+          </div>
+          <span class="help-block" *ngIf="formErrors.fullname">
+            {{ formErrors.fullname }}
+          </span>
+        </div>
+
+        <div formArrayName="skill" *ngFor="let skill of employeeform.get('skill').controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="col-sm-12">
+              <hr *ngIf="i>0">
+              <h2>Skills: </h2>
+              <div class="form-group">
+                <label [for]="'skillName' + i">Skill Name:</label>
+                <input type="text" (blur)="loginValidationError()" [id]="'skillName' + i" class="form-control"
+                  formControlName="skillName" placeholder="Enter Any Skill" autocomplete="off">
+                <button (click)="deleteSkill(i)" *ngIf="employeeform.get('skill').length > 1"
+                  class="btn btn-danger delete_skill"><span class="glyphicon glyphicon-remove"></span></button>
+                <span class="help-block"
+                  *ngIf="skill.get('skillName').errors?.required && skill.get('skillName').touched">
+                  Skill Name is required!!
+                </span>
+                <label [for]="'skillYears' + i">Skill Years</label>
+                <input type="number" (blur)="loginValidationError()" [id]="'skillYears' + i" class="form-control"
+                  formControlName="skillYears" placeholder="Skill Years..." autocomplete="off"
+                  (keydown)="number($event)">
+                <span class="help-block"
+                  *ngIf="skill.get('skillYears').errors?.required && skill.get('skillYears').touched">
+                  Skill Years is required!!
+                </span>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-12">
+          <button class="btn btn-primary" (click)="addSkillButton()" [disabled]="employeeform.get('skill').invalid">Add
+            More Skill</button>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="phone_number">Phone:</label>
+            <input type="number" (blur)="loginValidationError()" (keydown)="number($event)" class="form-control"
+              id="phone_number" formControlName="phone" autocomplete="off">
+          </div>
+          <span class="help-block" *ngIf="formErrors.phone">
+            {{ formErrors.phone }}
+          </span>
+        </div>
+
+        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-primary" (click)="onDataadd()">Load Data</button>
       </form>
     </div>
 
-    <div *ngIf="userDetails && userDetails.length; else noRecord">
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Skill</th>
+            <th>Phone</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of list; let i = index">
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.fullName }}</td>
+            <td *ngFor="let skill of employee.skilss"> Skill Name => {{skill.skillName}}
+               <br> Skill Year => {{ skill.experinceinskill }} 
+               </td>
+            <td>{{ employee.phone }}</td>
+            <td class="text-center"><button class="btn btn-primary" (click)="editEmp(employee, i)"> <span class="glyphicon glyphicon-pencil"></span></button></td>
+            <td class="text-center">
+              <button class="btn btn-danger"><span
+                class="glyphicon glyphicon-trash"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+<!-- <div *ngIf="userDetails && userDetails.length; else noRecord">
       <hr>
       <table class="table">
         <thead>
@@ -138,7 +235,8 @@
             <td>{{user.emp_mail}}</td>
             <td>{{user.emp_phone}}</td>
             <td>{{user.emp_depart}}</td>
-            <td><button class="btn btn-danger edit_btn" (click)=" onDelete(i)"><span class="glyphicon glyphicon-trash"></span></button></td>
+            <td><button class="btn btn-danger edit_btn" (click)=" onDelete(i)"><span
+                  class="glyphicon glyphicon-trash"></span></button></td>
             <td><button class="btn btn-info edit_btn" (click)="onEditMode(user, i)">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button></td>
@@ -146,20 +244,32 @@
         </tbody>
       </table>
 
-
-
-    </div>
+</div>
 
     <ng-template #noRecord>
-     <div class="text-center"> 
-       <h2>No record found</h2>
-     </div>
-    </ng-template>
-   
+      <div class="text-center">
+        <h2>No record found</h2>
+      </div>
+    </ng-template> -->
+<!-- <app-list-employees></app-list-employees> -->
+<!-- <router-outlet></router-outlet> -->
 
-    Valid: {{userForm.valid}}
-    <pre>
-      {{ userForm.value | json }}
-   </pre>
+<!-- </div>
   </div>
+</section> -->
+
+<section>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active"><a routerLink="list">List</a></li>
+      <li routerLinkActive="active"><a routerLink="create">Create</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <router-outlet></router-outlet>
+    </div>
+</div>
 </section>

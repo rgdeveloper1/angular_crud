@@ -1,0 +1,24 @@
+<section (click)="clickName()" class="user_panel">
+    <div class="panel-heading">{{ employees.fullName }}</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <img [src]="employees.imagePath" alt=".." class="image_user" />
+        </div>
+        <div class="col-sm-9">
+            <ul class="list-unstyled">
+                <!-- <li>Gender:  <span>{{emp.gender}}</span></li> -->
+                <li><span>Email : </span> {{employees.email}}</li>
+                <!-- <li><span>Phone : </span> {{emp.phonenumber}}</li> -->
+                <!-- <li><span>Date of Birth : </span> {{emp.dateofbirth}}</li> -->
+                <!-- <li><span>Department : </span> {{emp.department}}</li> -->
+                <!-- <li><span>Active : </span> {{emp.isActive}}</li> -->
+                <!-- <li><span>Contactpreference : </span> {{emp.contactpreference}}</li> -->
+                <li><a  [routerLink]="['/employees/edit', employees.id]"  class="btn btn-primary">Edit</a> 
+                  <button (click)="onDelete(employees.id)" class="delete btn btn-primary">Delete</button>
+                </li>
+              </ul>
+        </div>
+      </div>
+    </div>
+</section>

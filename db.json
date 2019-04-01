@@ -1,0 +1,16 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "Rohit Gupta ",
+      "email": "rgdeveloper1@gmail.com",
+      "imagePath": "assets/images/male.png"
+    },
+    {
+      "id": 2,
+      "fullName": "Mohit ",
+      "email": "mohit@gmail.com",
+      "imagePath": "assets/images/male.png"
+    }
+  ]
+}

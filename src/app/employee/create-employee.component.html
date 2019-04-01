@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{createPageTitle}}
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #createEmployeeform='ngForm'>
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" class="form-control" id="name" placeholder="" formControlName="fullName">
+      </div>
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" class="form-control" id="email" placeholder="" formControlName="email">
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="exampleInputPassword1">Gender</label>
+        <input type="text" [bsConfig]="datepickerconfig" bsDatepicker class="form-control" formControlName="control" placeholder="Password">
+      </div> -->
+
+
+      <div class="form-group">
+        <label for="photo">Photo Path</label>
+        <input type="text" formControlName="imagePath" class="form-control" id="photo">
+      </div>
+
+      <button class="btn btn-primary" [disabled]="!imagepath.value" type="button" (click)="priviewPhoto()">{{ previewPhoto? 'Hide': 'Show' }}
+        Preview</button>
+      <div class="form-group">
+        <img [src]='imagepath.value' class="image_user" alt="User Image" *ngIf="previewPhoto" >
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
