@@ -41,7 +41,7 @@ export class ListEmployeesComponent implements OnInit {
     if (confirm('Are you sure want to delete id = ' + id)) {
       this.empService.deleteEmployee(+id).subscribe(
         (res) => {
-          this.router.navigate(['/list']);
+          this.router.navigate(['/employees']);
           this.ngOnInit();
         }
       );

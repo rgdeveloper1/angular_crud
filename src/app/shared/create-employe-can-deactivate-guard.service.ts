@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
-import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { CreateEmployeeComponent } from '../employee/create-employee/create-employee.component';
 
 
 

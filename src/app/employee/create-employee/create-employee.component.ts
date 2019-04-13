@@ -199,14 +199,14 @@ export class CreateEmployeeComponent implements OnInit {
     if (id) {
       this.empService.updateEmployee(data, +id).subscribe(
         (res: any) => {
-          this.router.navigate(['/list']);
+          this.router.navigate(['/employees']);
           this.employeeForm.reset();
         }
       );
     } else {
-      this.empService.createEmployee('employess/list', data).subscribe(
+      this.empService.createEmployee('employees', data).subscribe(
         (res: any) => {
-          this.router.navigate(['/list']);
+          this.router.navigate(['/employees']);
           this.employeeForm.reset();
         }
       );

@@ -19,22 +19,22 @@
       ]
     },
     {
-      "id": 2,
-      "fullName": "Rahul",
+      "id": 4,
+      "fullName": "Aarohi",
       "contactPrefrences": "email",
-      "email": "abc@rohitguptarg.com",
-      "passwordgroup": {
-        "password": "1234",
-        "confirmPassword": "1234"
-      },
-      "imagePath": "assets/images/male.png",
+      "email": "sarohi@rohitguptarg.com",
       "skills": [
         {
-          "skillName": "HTML",
-          "experienceInYears": 5,
+          "skillName": "C#",
+          "experienceInYears": 3,
           "proficiency": "Advanced"
         }
-      ]
+      ],
+      "passwordgroup": {
+        "password": "a123",
+        "confirmPassword": "a123"
+      },
+      "imagePath": "assets/images/female.png"
     }
   ]
 }
