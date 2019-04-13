@@ -1,0 +1,38 @@
+<section (click)="clickName()" class="user_panel panel panel-primary"
+  [class.panel-success]="selectedEmployeeID ===employees.id">
+  <div class="panel-heading">{{ employees.fullName }}</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-3">
+        <img [src]="employees.imagePath" alt=".." class="image_user" />
+      </div>
+      <div class="col-sm-9">
+        <ul class="list-unstyled">
+          <li><span *ngIf="employees.email">Email : {{employees.email}}</span>
+            <span *ngIf="employees.mobilePhone">Contact No : {{employees.mobilePhone}}</span> </li>
+        </ul>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Skill Name</th>
+              <th>Proficiency</th>
+              <th>Experience</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let skillitem of employees.skills">
+            <td> {{skillitem.skillName}} </td>
+            <td> {{skillitem.proficiency}} </td>
+            <td> {{skillitem.experienceInYears}} </td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <!-- <a href="" class="btn btn-primary footer_btn">View</a> -->
+    <a  class="footer_btn btn btn-primary edit_btn" (click)="edit_button(employees.id)">Edit</a>
+    <button (click)="onDelete(employees.id)" class=" footer_btn btn btn-danger">Delete</button>
+
+  </div>
+</section>

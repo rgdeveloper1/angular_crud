@@ -17,7 +17,6 @@ export class EmployeeService {
             catchError(this.handleError)
         );
     }
-
     getEmployeesId(id: number) {
         return this.http.get(`${this.baseUrl}/employees/${id}`).pipe(
             catchError(this.handleError)

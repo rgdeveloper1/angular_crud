@@ -1,0 +1,168 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{createPageTitle}}
+  </div>
+
+  <div class="panel-body">
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #createEmployeeform='ngForm' autocomplete="off">
+
+      <div class="form-group col-sm-12"
+        [ngClass]="{'has-error': formErrors.fullName,  'has-success': employeeForm.get('fullName').valid }">
+        <label for="name" class="control-label">Name: </label>
+        <input type="text" (blur)="logValidationErrors(employeeForm)" class="form-control" id="name" placeholder=""
+          formControlName="fullName">
+        <span class="help-block" *ngIf="formErrors.fullName ">
+          {{formErrors.fullName}}
+        </span>
+      </div>
+
+      <div class=" col-sm-12">
+        <label>Contact Prefrences: </label>
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" value="email" formControlName="contactPrefrences">
+            Email
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="mobilePhone" formControlName="contactPrefrences">
+            Phone
+          </label>
+
+        </div>
+      </div>
+
+      <div class="form-group col-sm-12"
+        [ngClass]="{'has-error': formErrors.email, 'has-success': employeeForm.get('email').valid }">
+        <label for="email" class="control-label">Email: </label>
+        <input type="email" (blur)="logValidationErrors(employeeForm)" class="form-control" id="email"
+          placeholder="abcd@rohitguptarg.com" formControlName="email">
+        <span class="help-block" *ngIf="formErrors.email ">
+          {{formErrors.email}}
+        </span>
+      </div>
+      <div class="form-group col-sm-12" [ngClass]="{'has-error': formErrors.mobilePhone, 'has-success': phone }"
+        >
+        <label for="Phone" class="control-label">Phone: </label>
+        <input type="text" (blur)="logValidationErrors(employeeForm)" class="form-control" id="Phone" placeholder=""
+          formControlName="mobilePhone">
+        <span class="help-block" *ngIf="formErrors.mobilePhone">
+          {{formErrors.mobilePhone}}
+        </span>
+      </div>
+
+      <div class="skillsection col-sm-12">
+        <button class="btn btn-primary" type="button" [disabled]="!employeeForm.get('skills').valid" (click)="addSkill()">Add New Skill</button>
+        <br>
+        <br>
+        <div>
+          <div formArrayName="skills">
+            <div [formGroupName]="i" class="row"
+              *ngFor="let skill of employeeForm.get('skills').controls; let i =index">
+              <hr *ngIf="i>0" class="horizontal_line">
+              <div class="form-group col-md-3 col-sm-6"
+                [ngClass]="{'has-error': skill.get('skillName').touched && skill.get('skillName').invalid, 'has-success': skill.get('skillName').valid   }">
+                <label [attr.for]="'skillName'+ i" class="control-label">Skill Name: </label>
+                <input type="text"  class="form-control col-sm-6"
+                  [id]="'skillName'+ i" placeholder="C#, Angular, Java etc" formControlName="skillName">
+                <span class="help-block"
+                  *ngIf="skill.get('skillName').errors?.required && skill.get('skillName').touched ">
+                  Skill Name is required..
+                </span>
+              </div>
+
+
+              <div class="form-group col-md-3 col-sm-6"
+                [ngClass]="{'has-error':  skill.get('experienceInYears').touched && skill.get('experienceInYears').invalid, 'has-success': skill.get('experienceInYears').valid}">
+                <label [attr.for]="'experienceInYears'+ i" class="control-label">Experience: </label>
+                <input type="number"  class="form-control col-sm-6"
+                  [id]="'experienceInYears'+ i" placeholder="In Years" formControlName="experienceInYears">
+                <span class="help-block"
+                  *ngIf="skill.get('experienceInYears').errors?.required && skill.get('experienceInYears').touched">
+                  Experience is required..
+                </span>
+              </div>
+
+              <div class=" col-sm-12 col-md-5"
+                [ngClass]="{'has-error': skill.get('proficiency').touched && skill.get('proficiency').invalid && skill.get('proficiency').touched, 'has-success': skill.get('proficiency').valid }">
+                <label class="control-label">Experience: </label>
+                <div class="form-group">
+                  <label class="radio-inline">
+                    <input type="radio"  value="Beginner"
+                      formControlName="proficiency"> Beginner
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio"  value="Intermediate"
+                      formControlName="proficiency"> Intermediate
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" value="Advanced" 
+                      formControlName="proficiency"> Advanced
+                  </label>
+                  <span class="help-block"
+                    *ngIf="skill.get('proficiency').errors?.required && skill.get('proficiency').touched">
+                    Proficiency is required..
+                  </span>
+                </div>
+              </div>
+              <div class="form-group col-md-1">
+                  <button class="btn btn-danger" type="button" *ngIf="employeeForm.get('skills').length >1" (click)="skilldelete(i)">Delete </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12" formGroupName="passwordgroup">
+
+        <div class="row">
+          <div class="form-group col-sm-6"
+            [ngClass]="{'has-error': formErrors.password, 'has-success': employeeForm.get('passwordgroup.password').valid   }">
+            <label for="password" class="control-label">Password: </label>
+            <input type="password" (blur)="logValidationErrors(employeeForm)" class="form-control col-sm-6"
+              id="password" placeholder="Password" formControlName="password" #skill>
+            <span class="help-block" *ngIf="formErrors.password ">
+              {{formErrors.password}}
+            </span>
+          </div>
+
+          <div class="form-group col-sm-6"
+            [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordgroup, 'has-success': employeeForm.get('passwordgroup.confirmPassword').valid   }">
+            <label for="confirmPassword" class="control-label">Confirm Password: </label>
+            <input type="text" (blur)="logValidationErrors(employeeForm)" class="form-control col-sm-6"
+              id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword" #skill>
+            <span class="help-block" *ngIf="formErrors.confirmPassword || formErrors.passwordgroup">
+              {{formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordgroup }}
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group col-sm-12">
+        <label for="photo" class="control-label">Photo Path</label>
+        <input type="text" formControlName="imagePath" class="form-control" id="photo" autocomplete="on">
+        <br>
+
+        <button class="btn btn-primary" [disabled]="!imagepath.value" type="button"
+          (click)="priviewPhoto()">{{ previewPhoto? 'Hide': 'Show' }}
+          Preview</button>
+      </div>
+
+
+      <div class="form-group col-sm-12">
+        <img [src]='imagepath.value' class="image_user" alt="User Image" *ngIf="previewPhoto">
+      </div>
+
+      <div class="form-group col-sm-12">
+        <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Submit</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="loadData()">Load Data</button> -->
+      </div>
+
+    </form>
+  </div>
+</div>
+
+Form : {{employeeForm.valid}}
+<pre>
+    {{employeeForm.value | json}}
+</pre>

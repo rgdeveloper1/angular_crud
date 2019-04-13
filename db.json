@@ -2,15 +2,39 @@
   "employees": [
     {
       "id": 1,
-      "fullName": "Rohit Gupta ",
-      "email": "rgdeveloper1@gmail.com",
-      "imagePath": "assets/images/male.png"
+      "fullName": "Rohit",
+      "contactPrefrences": "mobilePhone",
+      "mobilePhone": "9675500039`",
+      "passwordgroup": {
+        "password": "12",
+        "confirmPassword": "12"
+      },
+      "imagePath": "assets/images/male.png",
+      "skills": [
+        {
+          "skillName": "Angular",
+          "experienceInYears": 3,
+          "proficiency": "Intermediate"
+        }
+      ]
     },
     {
       "id": 2,
-      "fullName": "Mohit ",
-      "email": "mohit@gmail.com",
-      "imagePath": "assets/images/male.png"
+      "fullName": "Rahul",
+      "contactPrefrences": "email",
+      "email": "abc@rohitguptarg.com",
+      "passwordgroup": {
+        "password": "1234",
+        "confirmPassword": "1234"
+      },
+      "imagePath": "assets/images/male.png",
+      "skills": [
+        {
+          "skillName": "HTML",
+          "experienceInYears": 5,
+          "proficiency": "Advanced"
+        }
+      ]
     }
   ]
 }

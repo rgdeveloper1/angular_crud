@@ -1,22 +1,26 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
-import { Employee } from '../shared_model/employee.model';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-display-employee',
   templateUrl: './display-employee.component.html',
   styleUrls: ['./display-employee.component.scss']
 })
 export class DisplayEmployeeComponent implements OnInit {
+  selectedEmployeeID: number;
   @Input() employees;
+  @Input() index;
   @Output() user_id = new EventEmitter<number>();
+
+
 
   // tslint:disable-next-line:whitespace
   @Output() notify = new EventEmitter<string>();
 
-  constructor() {}
-  ngOnInit() { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
+  ngOnInit() {
+    this.selectedEmployeeID = +this.route.snapshot.paramMap.get('id');
+  }
 
   onDelete(id: number) {
     this.user_id.emit(id);
@@ -28,5 +32,7 @@ export class DisplayEmployeeComponent implements OnInit {
   getNameandGender(): string {
     return this.employees.fullName + '' + this.employees.email;
   }
-
+  edit_button(id: number) {
+    this.router.navigate(['/employees/edit', id]);
+  }
 }

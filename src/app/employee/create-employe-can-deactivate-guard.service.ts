@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
-import { CreateEmployeeComponent } from './create-employee.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+
+
 
 
 
@@ -9,9 +11,8 @@ export class CreateEmployeCanDeactivateGuardService implements CanDeactivate<Cre
     constructor() {}
     canDeactivate(component: CreateEmployeeComponent) {
         if (component.createEmpForm.dirty) {
-            return confirm('Are you sure want to discardd this page');
+            return confirm('Are you sure want to discard those changes ?');
         }
-
         return true;
     }
 }

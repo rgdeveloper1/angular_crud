@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .image_user{
-    width: 214px;
-    height: 185px;
+    width: 150px;
+    height: 150px;
 }
 .panel-heading {
     color: #fff;
@@ -10,4 +10,10 @@
 }
 .delete{
     margin-left: 10px
+}
+.horizontal_line{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid black;
 }
