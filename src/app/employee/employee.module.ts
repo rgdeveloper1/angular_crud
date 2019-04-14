@@ -9,6 +9,7 @@ import { DisplayEmployeeComponent } from './display-employee/display-employee.co
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { EmployeedetailsComponent } from './employee-details/employeedetails.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -17,7 +18,8 @@ import { EmployeedetailsComponent } from './employee-details/employeedetails.com
     CreateEmployeeComponent,
     ListEmployeesComponent,
     DisplayEmployeeComponent,
-    EmployeedetailsComponent
+    EmployeedetailsComponent,
+    DashboardComponent
   ],
   imports: [
     EmployeeRoutingModule,
