@@ -5,7 +5,7 @@ export class CustomValidator {
   static emailDomain(domainName: string) {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const email: string = control.value;
-      const domainEmail = email.substring(email.lastIndexOf('@') + 1);
+      const domainEmail = email ? email.substring(email.lastIndexOf('@') + 1) : '';
       if (email === '' || domainEmail.toLowerCase() === domainName.toLowerCase()) {
         return null;
       } else {
