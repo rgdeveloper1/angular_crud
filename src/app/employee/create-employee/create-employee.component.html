@@ -58,7 +58,7 @@
         <div>
           <div formArrayName="skills">
             <div [formGroupName]="i" class="row"
-              *ngFor="let skill of employeeForm.get('skills').controls; let i =index">
+              *ngFor="let skill of employeeForm.get('skills')?.controls; let i =index">
               <hr *ngIf="i>0" class="horizontal_line">
               <div class="form-group col-md-3 col-sm-6"
                 [ngClass]="{'has-error': skill.get('skillName').touched && skill.get('skillName').invalid, 'has-success': skill.get('skillName').valid   }">
